@@ -1,8 +1,8 @@
 import re
-from enum import StrEnum
+from enum import Enum
 
 
-class InferredType(StrEnum):
+class InferredType(Enum):
     """Represents the inferred type of the column."""
     INT = 'int'
     FLOAT = 'float'
