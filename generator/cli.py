@@ -20,7 +20,10 @@ click_log.basic_config(logger)
 
 @click.command()
 @click.argument('input_file', type=click.Path(exists=True))
-@click.option('--output', '-o', default='-', help='Output directory for generated files. Defaults to stdout.')
+@click.option(
+    '--output', '-o', default='output',
+    help='Output directory for generated files. "-" outputs the result to stdout.'
+)
 @click.option('--sample-size', '-s', default=256, help='Number of rows to sample for type inference')
 @click.option(
     '--name', '-n', default=None,
