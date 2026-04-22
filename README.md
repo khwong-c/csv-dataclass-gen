@@ -7,7 +7,7 @@ Generate Python dataclasses and loader functions from CSV/TSV files.
 - **Automatic Type Inference**: Detects `int`, `float`, and `str` types based on a sample of rows.
 - **Dialect Detection**: Automatically identifies CSV delimiters (including TSV).
 - **Name Sanitization**: Converts CSV column headers into valid Python identifiers.
-- **Iterator Loading**: Generates a loading generator that yields dataclass instances, suitable for larger datasets.
+- **Iterator Loading**: Generates a loading generator that yields dataclass instances.
 
 ## Installation
 
@@ -80,9 +80,13 @@ def load_users(csv_path: Path, max_rows: int | None = None, delimiter: str = ','
 
 ## Development
 
+### Code Template
+
+The generator comes with a [Dataclass and Loader template](generator/templates/dataclass_template.py.jinja2).
+
 ### Dependencies
 
-This project uses [uv](https://github.com/astral-sh/uv) for dependency management, but it can also be installed using standard tools.
+This project uses [uv](https://github.com/astral-sh/uv) for dependency management.
 
 ```bash
 uv sync --all-groups

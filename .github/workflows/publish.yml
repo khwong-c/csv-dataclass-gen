@@ -3,8 +3,6 @@ name: Publish Python Package
 on:
   release:
     types: [published]
-  workflow_dispatch:
-
 
 permissions:
   contents: read
@@ -41,8 +39,8 @@ jobs:
   release-build:
     runs-on: ubuntu-latest
     needs:
-     - lint
-     - test
+      - lint
+      - test
     steps:
       - uses: actions/checkout@v6
       - name: Setup UV and Python
