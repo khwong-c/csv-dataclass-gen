@@ -1,0 +1,52 @@
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Iterator
+import csv
+
+
+@dataclass
+class {{ class_name }}:
+    """
+    Dataclass for {{ filename }}.
+    """
+{%- for col in columns %}
+    {{ col.sanitized_name }}: {{ col.converter_name }}  # Original: "{{ col.original_name }}"
+{%- endfor %}
+
+
+def {{ function_name }}(
+    csv_path: Path,
+    max_rows: int | None = None,
+    delimiter: str = '{{ delimiter }}'
+) -> Iterator[{{ class_name }}]:
+    """
+    Loader for {{ filename }}.
+
+    Yields one dataclass instance per row. Memory-efficient for large files.
+
+    Args:
+        csv_path: Path to the CSV/TSV file
+        max_rows: Optional limit on the number of rows to load (default: None = all rows)
+        delimiter: Field delimiter (default: '{{ delimiter }}')
+
+    Yields:
+        {{ class_name }} instances
+
+    Example:
+        for row in {{ function_name }}('{{ filename }}', max_rows=100):
+            print(row)
+    """
+    with csv_path.open() as f:
+        reader = csv.DictReader(f, delimiter=delimiter)
+        for i, row_dict in enumerate(reader):
+            if max_rows is not None and i >= max_rows:
+                break
+
+            # Create instance with type conversions
+            instance = {{ class_name }}(
+{%- for col in columns %}
+                {{ col.sanitized_name }}={{ col.converter_name }}(row_dict.get('{{ col.original_name }}', '')),
+{%- endfor %}
+            )
+            yield instance
+

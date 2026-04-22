@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "csv-dataclass-gen"
+version = "0.1.0"
+description = "Generate Python dataclasses, loaders, from CSV/TSV files"
+requires-python = ">=3.10"
+authors = [{ name = "khwong-c", email = "kin.hin.wong.c@gmail.com" }]
+license = { file = "LICENSE" }
+dependencies = [
+    "Jinja2>=3.1.0",
+    "click>=8.1.0",
+    "click-log>=0.4.0",
+]
+
+[dependency-groups]
+dev = [
+    { include-group = "lint" },
+    { include-group = "test" }
+]
+lint = [
+    "ruff"
+]
+test = [
+    "pytest"
+]
+
+
+[project.scripts]
+csv-dataclass-gen = "generator.cli:generate"
+
+[tool.setuptools.packages.find]
+include = ["generator*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
