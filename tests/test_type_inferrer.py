@@ -1,4 +1,3 @@
-import pytest
 from generator.type_inferrer import infer_type, InferredType
 
 
