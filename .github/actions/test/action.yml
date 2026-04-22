@@ -1,0 +1,9 @@
+name: 'Test'
+description: 'Test the project with pytest'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Test with pytest
+      shell: bash
+      run: uv run pytest

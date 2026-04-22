@@ -1,0 +1,8 @@
+name: 'Lint'
+description: 'Lint the project with Ruff'
+runs:
+  using: "composite"
+  steps:
+    - name: Lint with Ruff
+      shell: bash
+      run: uv run ruff check
