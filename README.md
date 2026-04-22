@@ -11,18 +11,8 @@ Generate Python dataclasses and loader functions from CSV/TSV files.
 
 ## Installation
 
-This project uses [uv](https://github.com/astral-sh/uv) for dependency management, but it can also be installed using standard tools.
-
 ```bash
-# Clone the repository
-git clone https://github.com/khwong-c/csv-dataclass-gen.git
-cd csv-dataclass-gen
-
-# Install dependencies using uv
-uv sync
-
-# Or using pip
-pip install .
+pip install csv-dataclass-gen
 ```
 
 ## Usage
@@ -50,8 +40,8 @@ Usage: csv-dataclass-gen [OPTIONS] INPUT_FILE
   Generate dataclass and loader code from CSV files.
 
 Options:
-  -o, --output TEXT          Output directory for generated files. Defaults to
-                             stdout.
+  -o, --output TEXT          Output directory for generated files. "-" outputs
+                             the result to stdout.
   -s, --sample-size INTEGER  Number of rows to sample for type inference
   -n, --name TEXT            Alternative name for the generated name. Snake
                              case / spaced words is recommended.
@@ -90,14 +80,20 @@ def load_users(csv_path: Path, max_rows: int | None = None, delimiter: str = ','
 
 ## Development
 
+### Dependencies
+
+This project uses [uv](https://github.com/astral-sh/uv) for dependency management, but it can also be installed using standard tools.
+
+```bash
+uv sync --all-groups
+```
+
 ### Running Tests
 
 We use `pytest` for testing.
 
 ```bash
 uv run pytest
-# or
-pytest
 ```
 
 Tests include:
