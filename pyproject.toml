@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools>=45", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
 name = "csv-dataclass-gen"
-version = "1.0.0"
+version = "1.0.1"
 description = "Generate Python dataclasses, loaders, from CSV/TSV files"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -55,8 +55,11 @@ test = [
 [project.scripts]
 csv-dataclass-gen = "generator.cli:generate"
 
-[tool.setuptools.packages.find]
-include = ["generator*"]
+[tool.hatch.build.targets.wheel]
+packages = ["generator"]
+
+[tool.uv.build-backend]
+source-include = ["generator/**"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
